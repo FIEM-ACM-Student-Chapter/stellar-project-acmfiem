@@ -1,6 +1,6 @@
 # Stellar Soroban Smart Contract Projects
 
-A collection of 35 Soroban smart contract projects with React frontends. Each project folder contains a ready-to-use contract, stellar.js helper, and React UI.
+A collection of 60 Soroban smart contract project folders with React frontends. Each project folder contains a ready-to-use contract, stellar.js helper, and React UI.
 
 ## Repository Ownership Update
 
@@ -39,7 +39,7 @@ This base project already includes the starter setup, so there is no separate de
 
 ### Step 2 -- Pick a project and copy the code
 
-Open this repository in your browser to browse all the project folders (01 through 39). Pick the project you want to build.
+Open this repository in your browser to browse the numbered project folders (currently 01 through 63, with some numbers intentionally unused). Pick the project you want to build.
 
 Each project folder has this structure:
 
@@ -168,6 +168,30 @@ Open the URL shown in the terminal (usually http://localhost:5173). Your app is 
 | 37 | Learning Sessions | Pay-per-session tutoring |
 | 38 | Prepaid Orders | Order flow with payment and shipping |
 | 39 | Sponsored Posts | Ad campaigns with per-view billing |
+| 40 | Attendance Tracker | Session check-in tracking with attendee counts |
+| 41 | Loyalty Rewards | Points accrual, redemption, and tier updates |
+| 42 | Event RSVP | Event registration with attendance confirmation |
+| 43 | Lost and Found | Item reporting, claiming, and resolution workflow |
+| 44 | Subscription Registry | Subscription lifecycle with renew, pause, cancel |
+| 45 | Warranty Registry | Warranty registration, transfer, and claims |
+| 46 | Bounty Board | Bounty posting, assignment, submission, approval |
+| 47 | Referral Rewards | Referral campaign tracking with reward issuance |
+| 48 | Shift Scheduling | Shift assignment and active shift tracking |
+| 49 | Visitor Pass Management | Visitor access passes with check-in and check-out |
+| 50 | Expense Splitter | Shared expense groups with contribution counts and settlement |
+| 51 | Equipment Checkout | Equipment registry with checkout, return, and retirement |
+| 52 | Volunteer Coordination | Volunteer drives with join and confirmation flow |
+| 53 | Meeting Minutes | Meeting records with note capture and approval |
+| 54 | License Renewal | License renewal requests with approval and revocation |
+| 55 | Pledge Campaign | Pledge collection with supporter confirmations |
+| 56 | Feedback Board | Feedback records with review and approval workflow |
+| 57 | Internship Logbook | Internship progress logbooks with mentor approval |
+| 58 | Asset Maintenance | Asset servicing records with maintenance approval |
+| 59 | Grant Request | Grant request submissions with approval lifecycle |
+| 60 | Voucher Claims | Voucher issuance with claim and approval flow |
+| 61 | Checklist Review | Checklist submission and archive workflow |
+| 62 | Scholarship Applications | Student scholarship applications with committee approvals |
+| 63 | Carpool Board | Ride board with join, confirmation, and closing flow |
 
 ---
 
@@ -177,3 +201,5 @@ Open the URL shown in the terminal (usually http://localhost:5173). Your app is 
 - **Read simulation fails** -- Check that `CONTRACT_ID` and `DEMO_ADDR` are filled in `stellar.js`
 - **Transaction rejected** -- Make sure your wallet has test XLM (fund with Friendbot) and is on Testnet
 - **Method not found** -- Make sure the function names in `stellar.js` match your deployed contract
+
+
