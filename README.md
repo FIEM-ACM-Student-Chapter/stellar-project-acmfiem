@@ -2,6 +2,12 @@
 
 A collection of 35 Soroban smart contract projects with React frontends. Each project folder contains a ready-to-use contract, stellar.js helper, and React UI.
 
+## Repository Ownership Update
+
+This project was originally published under a personal GitHub account and has now been transferred to an organization account for long-term maintenance and collaboration.
+
+If you are following older links, use the current organization repository URL instead.
+
 ## Prerequisites
 
 - Node.js 18+
@@ -16,8 +22,8 @@ A collection of 35 Soroban smart contract projects with React frontends. Each pr
 ### Step 1 -- Clone the repo and set up a fresh project
 
 ```bash
-git clone https://github.com/Suryashish/base-project-stellar-x-Hacktropica my-stellar-app
-cd my-stellar-app
+git clone https://github.com/FIEM-ACM-Student-Chapter/base-stellar-project-acmfiem.git
+cd base-stellar-project-acmfiem
 ```
 
 Remove the existing git history and start fresh:
