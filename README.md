@@ -26,10 +26,39 @@ git clone https://github.com/FIEM-ACM-Student-Chapter/base-stellar-project-acmfi
 cd base-stellar-project-acmfiem
 ```
 
-Remove the existing git history and start fresh:
+Remove the existing git history and start fresh using the command for your terminal:
+
+**Command Prompt (cmd)**
+
+```bat
+rmdir /s /q .git
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+**PowerShell**
+
+```powershell
+Remove-Item -Recurse -Force .git
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+**macOS**
 
 ```bash
-rmdir /s /q .git
+rm -rf .git
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+**Linux**
+
+```bash
+rm -rf .git
 git init
 git add .
 git commit -m "Initial commit"
