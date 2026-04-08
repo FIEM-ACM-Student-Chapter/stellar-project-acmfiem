@@ -1,0 +1,494 @@
+/* 04 - Booking & Reservation — "Calendar" Theme */
+:root {
+    --indigo: #4f46e5;
+    --indigo-dark: #4338ca;
+    --indigo-light: #e0e7ff;
+    --indigo-50: #eef2ff;
+    --purple-100: #ede9fe;
+    --white: #ffffff;
+    --surface: #f8faff;
+    --border: #e0e7ff;
+    --text: #1e1b4b;
+    --text-muted: #6366f1;
+    --text-secondary: #64748b;
+    --success: #059669;
+    --danger: #dc2626;
+    --primary: #4f46e5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #f5f3ff 100%);
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* ── App Shell ── */
+.app {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ── Hero / Header ── */
+.calendar-hero {
+    background: var(--white);
+    border-radius: 16px 16px 0 0;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 3px solid var(--indigo);
+    position: relative;
+}
+
+.hero-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.hero-content .kicker {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.hero-content h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-top: 0.2rem;
+    line-height: 1.2;
+}
+
+.hero-content h1::before {
+    content: "\1F4C5 ";
+    font-size: 1.4rem;
+}
+
+.hero-content .subtitle {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-top: 0.4rem;
+    line-height: 1.5;
+    max-width: 550px;
+}
+
+/* ── Wallet Card in Hero ── */
+.wallet-card {
+    background: var(--indigo);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-end;
+    min-width: 200px;
+}
+
+.wallet-card .connect-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    padding: 0.4rem 0.9rem;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.wallet-card .connect-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.wallet-card .wallet-status {
+    font-size: 0.72rem;
+    opacity: 0.85;
+    word-break: break-all;
+    text-align: right;
+    max-width: 200px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.wallet-card .slot-count {
+    font-size: 0.7rem;
+    background: rgba(255,255,255,0.15);
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+}
+
+/* ── Status Dot ── */
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.status-dot.connected { background: #22c55e; }
+.status-dot.disconnected { background: #ef4444; }
+
+/* ── Stats Bar ── */
+.stats-bar {
+    display: flex;
+    gap: 0;
+    background: var(--indigo-50);
+    border-radius: 0;
+}
+
+.stat-item {
+    flex: 1;
+    padding: 0.75rem 1.25rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+}
+
+.stat-item:last-child {
+    border-right: none;
+}
+
+.stat-item .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.stat-item .stat-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--indigo);
+    margin-top: 0.15rem;
+}
+
+/* ── Tab Navigation ── */
+.tab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); background: var(--white); }
+.tab-btn { padding: 0.6rem 1.2rem; border: none; background: none; font: inherit; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s; }
+.tab-btn:hover { color: var(--indigo); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* ── Section Cards ── */
+.section-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.section-card:last-child {
+    border-radius: 0 0 16px 16px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.75rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.section-header::before {
+    font-size: 1.1rem;
+}
+
+.section-header.slot-header::before {
+    content: "\23F0";
+}
+
+.section-header.booking-header::before {
+    content: "\1F4CB";
+}
+
+.section-header.results-header::before {
+    content: "\1F4CA";
+}
+
+.section-header h2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.section-body {
+    padding: 1.5rem 1.75rem;
+}
+
+/* ── Form Fields ── */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-grid .full-span {
+    grid-column: 1 / -1;
+}
+
+.cal-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.cal-field label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+}
+
+.cal-field input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font: inherit;
+    font-size: 0.88rem;
+    background: var(--white);
+    color: var(--text);
+    transition: all 0.2s;
+}
+
+.cal-field input:focus {
+    outline: none;
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 4px rgba(79,70,229,0.1);
+}
+
+/* ── Helper Text ── */
+.helper { display: block; font-size: 0.72rem; color: #94a3b8; margin-top: 0.25rem; }
+
+/* Clock-style time fields */
+.time-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.time-field {
+    position: relative;
+}
+
+.time-field::before {
+    content: "\1F552";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    pointer-events: none;
+    opacity: 0.3;
+    margin-top: 10px;
+}
+
+.time-field input {
+    padding-right: 2.2rem;
+}
+
+/* ── Action Buttons ── */
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+}
+
+.btn-cal {
+    padding: 0.55rem 1.2rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid var(--indigo);
+    background: var(--white);
+    color: var(--indigo);
+    position: relative;
+}
+
+.btn-cal:hover {
+    background: var(--indigo-light);
+    transform: translateY(-1px);
+}
+
+.btn-cal:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-cal-primary {
+    background: var(--indigo);
+    color: var(--white);
+    border-color: var(--indigo);
+}
+
+.btn-cal-primary:hover {
+    background: var(--indigo-dark);
+    border-color: var(--indigo-dark);
+}
+
+.btn-cal-success {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+}
+
+.btn-cal-success:hover {
+    background: #047857;
+    border-color: #047857;
+}
+
+.btn-cal-danger {
+    background: var(--white);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.btn-cal-danger:hover {
+    background: #fef2f2;
+}
+
+.btn-ghost-cal {
+    background: transparent;
+    color: var(--indigo);
+    border: none;
+}
+
+.btn-ghost-cal:hover {
+    background: var(--indigo-light);
+}
+
+/* ── Loading Spinner ── */
+.btn-loading { position: relative; color: transparent !important; }
+.btn-loading::after {
+    content: ""; position: absolute; width: 16px; height: 16px;
+    top: 50%; left: 50%; margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Confirm State ── */
+.btn-confirm { animation: pulse 0.5s ease; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+/* ── Output / Results ── */
+.results-output {
+    background: #1e1b4b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.results-output.output-success { border-left: 4px solid #22c55e; }
+.results-output.output-error { border-left: 4px solid #ef4444; }
+.results-output.output-idle { border-left: 4px solid #94a3b8; }
+
+.results-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    background: #0f0e2a;
+    color: #a5b4fc;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.results-bar::before {
+    content: "\25CF";
+    color: #818cf8;
+    font-size: 0.5rem;
+}
+
+.results-output pre {
+    margin: 0;
+    padding: 1.25rem;
+    color: #c7d2fe;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-height: 130px;
+    line-height: 1.6;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 130px;
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem;
+}
+
+.empty-state .empty-icon {
+    font-size: 2rem;
+    opacity: 0.4;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+    .hero-top {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .wallet-card {
+        align-items: flex-start;
+        min-width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .time-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-bar {
+        flex-direction: column;
+    }
+
+    .stat-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .btn-cal {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tab-nav {
+        overflow-x: auto;
+    }
+}

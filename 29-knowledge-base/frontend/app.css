@@ -1,0 +1,441 @@
+/* 29 - Knowledge Base — Wiki / Blue-Gray Theme */
+:root {
+    --kb-gray: #64748b;
+    --kb-gray-dark: #334155;
+    --kb-gray-light: #f1f5f9;
+    --kb-blue: #3b82f6;
+    --kb-blue-light: #dbeafe;
+    --kb-white: #ffffff;
+    --kb-border: #e2e8f0;
+    --kb-radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--kb-gray-dark);
+    background: var(--kb-gray-light);
+    padding: 0;
+}
+
+/* ---- Layout ---- */
+.app {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+/* ---- Wallet Status Bar ---- */
+.wallet-status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--kb-border);
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.82rem;
+    color: var(--kb-gray);
+}
+
+.wallet-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    flex-shrink: 0;
+}
+
+.wallet-dot.connected {
+    background: #22c55e;
+}
+
+.wallet-status-text {
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.8rem;
+}
+
+/* ---- Hero / Masthead ---- */
+.hero {
+    background: var(--kb-white);
+    border-bottom: 3px solid var(--kb-blue);
+    padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+    margin-bottom: 1.25rem;
+    border-radius: var(--kb-radius) var(--kb-radius) 0 0;
+}
+
+.hero-top {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.25rem;
+}
+
+.hero-icon {
+    font-size: 1.8rem;
+}
+
+.hero .kicker {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--kb-gray);
+}
+
+.hero h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--kb-gray-dark);
+    margin: 0.15rem 0 0.3rem;
+    line-height: 1.2;
+}
+
+.hero .subtitle {
+    font-size: 0.95rem;
+    color: var(--kb-gray);
+    margin-bottom: 1rem;
+}
+
+/* ---- Wallet Bar ---- */
+.wallet-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--kb-gray-light);
+    border: 1px solid var(--kb-border);
+    border-radius: var(--kb-radius);
+    padding: 0.5rem 0.75rem;
+}
+
+.wallet-bar .wallet-text {
+    font-size: 0.82rem;
+    color: var(--kb-gray);
+    word-break: break-all;
+    flex: 1;
+    font-family: "Consolas", "Monaco", monospace;
+}
+
+.wallet-bar button {
+    background: var(--kb-blue);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.45rem 1rem;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.wallet-bar button:hover {
+    background: #2563eb;
+}
+
+.article-count {
+    font-size: 0.82rem;
+    color: var(--kb-gray);
+    margin-top: 0.6rem;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--kb-blue);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 12px;
+    vertical-align: middle;
+    margin-left: 0.25rem;
+}
+
+.badge-outline {
+    background: transparent;
+    color: var(--kb-blue);
+    border: 1.5px solid var(--kb-blue);
+}
+
+/* ---- Tab Navigation ---- */
+.tab-bar {
+    display: flex;
+    gap: 0.25rem;
+    background: var(--kb-white);
+    border: 1px solid var(--kb-border);
+    border-radius: var(--kb-radius);
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 0.55rem 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--kb-gray);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn:hover {
+    background: var(--kb-gray-light);
+}
+
+.tab-btn.active {
+    background: var(--kb-blue);
+    color: #fff;
+}
+
+/* ---- Cards / Panels ---- */
+.card {
+    background: var(--kb-white);
+    border: 1px solid var(--kb-border);
+    border-radius: var(--kb-radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--kb-gray-light);
+    border-bottom: 1px solid var(--kb-border);
+}
+
+.card-header h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--kb-gray-dark);
+}
+
+.card-header .card-icon {
+    font-size: 1.1rem;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+/* ---- Form Fields ---- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem 1.25rem;
+}
+
+.form-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--kb-gray);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--kb-border);
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.92rem;
+    background: var(--kb-white);
+    color: var(--kb-gray-dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--kb-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field-helper {
+    display: block;
+    font-size: 0.73rem;
+    color: var(--kb-gray);
+    margin-top: 0.2rem;
+    line-height: 1.3;
+}
+
+/* ---- Buttons ---- */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.btn {
+    background: var(--kb-blue);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.55rem 0.9rem;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.btn:hover:not(:disabled) {
+    background: #2563eb;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--kb-blue);
+    border: 1.5px solid var(--kb-blue);
+}
+
+.btn-outline:hover:not(:disabled) {
+    background: var(--kb-blue-light);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--kb-gray-dark);
+    border: 1px solid var(--kb-border);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: var(--kb-gray-light);
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #dc2626;
+}
+
+/* ---- Loading Spinner ---- */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.btn-outline.btn-loading::after,
+.btn-ghost.btn-loading::after {
+    border-color: rgba(59, 130, 246, 0.2);
+    border-top-color: var(--kb-blue);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---- Output ---- */
+.output-card .card-body pre,
+.output-pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--kb-gray-light);
+    border: 1px solid var(--kb-border);
+    border-left: 4px solid var(--kb-border);
+    border-radius: 6px;
+    padding: 0.9rem;
+    min-height: 120px;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.85rem;
+    color: var(--kb-gray-dark);
+    transition: border-color 0.3s;
+}
+
+.output-pre.status-success {
+    border-left-color: #22c55e;
+}
+
+.output-pre.status-error {
+    border-left-color: #ef4444;
+}
+
+.output-pre.status-idle {
+    border-left-color: var(--kb-border);
+    color: var(--kb-gray);
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 641px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .actions {
+        grid-template-columns: 1fr;
+    }
+    .wallet-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .tab-bar {
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        font-size: 0.78rem;
+        padding: 0.45rem;
+    }
+}

@@ -1,0 +1,455 @@
+/* 30 - Survey Builder — Green / Form Builder Theme */
+:root {
+    --sb-green: #16a34a;
+    --sb-green-light: #f0fdf4;
+    --sb-green-dark: #14532d;
+    --sb-green-mid: #22c55e;
+    --sb-green-border: #bbf7d0;
+    --sb-white: #ffffff;
+    --sb-gray: #6b7280;
+    --sb-radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--sb-green-dark);
+    background: linear-gradient(180deg, var(--sb-green-light) 0%, #e8faf0 50%, #f0fdf4 100%);
+    padding: clamp(1rem, 4vw, 3rem);
+}
+
+/* ---- Layout ---- */
+.app {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* ---- Wallet Status Bar ---- */
+.wallet-status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(240, 253, 244, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--sb-green-border);
+    padding: 0.5rem 1rem;
+    margin: -1rem -1rem 1rem -1rem;
+    font-size: 0.82rem;
+    color: var(--sb-gray);
+}
+
+.wallet-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    flex-shrink: 0;
+}
+
+.wallet-dot.connected {
+    background: #22c55e;
+}
+
+.wallet-status-text {
+    font-family: "Consolas", monospace;
+    font-size: 0.8rem;
+}
+
+/* ---- Hero ---- */
+.hero {
+    text-align: center;
+    padding: clamp(1.5rem, 4vw, 2.5rem) 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--sb-green);
+    color: #fff;
+    border-radius: 16px;
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--sb-green-dark);
+    margin-bottom: 0.25rem;
+}
+
+.hero .subtitle {
+    font-size: 0.95rem;
+    color: var(--sb-gray);
+    margin-bottom: 1.25rem;
+}
+
+/* ---- Wallet Bar ---- */
+.wallet-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: var(--sb-white);
+    border: 1px solid var(--sb-green-border);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.wallet-bar .wallet-text {
+    font-size: 0.82rem;
+    color: var(--sb-gray);
+    word-break: break-all;
+    flex: 1;
+    font-family: "Consolas", monospace;
+}
+
+.wallet-bar button {
+    background: var(--sb-green);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.45rem 1rem;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.wallet-bar button:hover {
+    background: #15803d;
+}
+
+.survey-count {
+    font-size: 0.85rem;
+    color: var(--sb-gray);
+    margin-top: 0.75rem;
+}
+
+/* ---- Counter Visual ---- */
+.counter-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    background: var(--sb-green);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border-radius: 14px;
+    padding: 0 0.5rem;
+    vertical-align: middle;
+    margin-left: 0.25rem;
+}
+
+/* ---- Tab Navigation ---- */
+.tab-bar {
+    display: flex;
+    gap: 0.25rem;
+    background: var(--sb-white);
+    border: 1px solid var(--sb-green-border);
+    border-radius: var(--sb-radius);
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 0.55rem 0.75rem;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--sb-gray);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn:hover {
+    background: var(--sb-green-light);
+}
+
+.tab-btn.active {
+    background: var(--sb-green);
+    color: #fff;
+}
+
+/* ---- Cards ---- */
+.card {
+    background: var(--sb-white);
+    border: 1px solid var(--sb-green-border);
+    border-radius: var(--sb-radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(20, 83, 45, 0.06);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    border-bottom: 2px solid var(--sb-green-border);
+}
+
+.card-header .card-icon {
+    font-size: 1.15rem;
+}
+
+.card-header h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sb-green-dark);
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+/* ---- Question count card header ---- */
+.card-header .question-counter {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    color: var(--sb-gray);
+}
+
+/* ---- Form Fields ---- */
+.form-stack .field {
+    margin-bottom: 0.75rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sb-green-dark);
+    margin-bottom: 0.25rem;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.92rem;
+    background: var(--sb-white);
+    color: var(--sb-green-dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--sb-green);
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field-helper {
+    display: block;
+    font-size: 0.73rem;
+    color: var(--sb-gray);
+    margin-top: 0.2rem;
+    line-height: 1.3;
+}
+
+/* ---- Buttons ---- */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.btn {
+    background: var(--sb-green);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+}
+
+.btn:hover:not(:disabled) {
+    background: #15803d;
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--sb-green);
+    border: 1.5px solid var(--sb-green);
+}
+
+.btn-outline:hover:not(:disabled) {
+    background: var(--sb-green-light);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--sb-green-dark);
+    border: 1px solid var(--sb-green-border);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: var(--sb-green-light);
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #dc2626;
+}
+
+/* ---- Loading Spinner ---- */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.btn-outline.btn-loading::after,
+.btn-ghost.btn-loading::after {
+    border-color: rgba(22, 163, 74, 0.2);
+    border-top-color: var(--sb-green);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---- Progress Indicator (response count) ---- */
+.progress-bar-wrap {
+    background: #e5e7eb;
+    border-radius: 6px;
+    height: 8px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, var(--sb-green), var(--sb-green-mid));
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.3s ease;
+}
+
+/* ---- Output ---- */
+.output-card .card-body pre,
+.output-pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--sb-green-light);
+    border: 1px solid var(--sb-green-border);
+    border-left: 4px solid var(--sb-green-border);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 120px;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.85rem;
+    color: var(--sb-green-dark);
+    transition: border-color 0.3s;
+}
+
+.output-pre.status-success {
+    border-left-color: #22c55e;
+}
+
+.output-pre.status-error {
+    border-left-color: #ef4444;
+}
+
+.output-pre.status-idle {
+    border-left-color: var(--sb-green-border);
+    color: var(--sb-gray);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .actions {
+        grid-template-columns: 1fr;
+    }
+    .wallet-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .tab-bar {
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        font-size: 0.78rem;
+        padding: 0.45rem;
+    }
+    .wallet-status-bar {
+        margin: -1rem -0.5rem 1rem -0.5rem;
+    }
+}

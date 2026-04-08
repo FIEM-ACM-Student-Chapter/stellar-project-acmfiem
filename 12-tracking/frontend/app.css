@@ -1,0 +1,421 @@
+/* ===== 12-Tracking — Logistics Theme ===== */
+:root {
+    --cyan: #0891b2;
+    --dark: #164e63;
+    --light: #ecfeff;
+    --cyan-mid: #06b6d4;
+    --white: #ffffff;
+    --border: #a5f3fc;
+    --muted: #475569;
+    --surface: #f0fdfa;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    color: var(--dark);
+    background: linear-gradient(180deg, var(--dark) 0%, #0e7490 4%, var(--light) 12%);
+    padding: 0;
+}
+
+/* Loading spinner */
+.btn-loading { position: relative; color: transparent !important; pointer-events: none; }
+.btn-loading::after { content: ""; position: absolute; width: 16px; height: 16px; top: 50%; left: 50%; margin: -8px 0 0 -8px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Wallet Status Bar */
+.wallet-bar {
+    background: var(--dark);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.82rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--cyan);
+}
+
+.wallet-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-dot.connected { background: #4ade80; box-shadow: 0 0 6px rgba(74, 222, 128, 0.6); }
+.status-dot.disconnected { background: #f87171; box-shadow: 0 0 6px rgba(248, 113, 113, 0.6); }
+
+.wallet-bar .wallet-text {
+    font-family: "Consolas", "Courier New", monospace;
+    opacity: 0.85;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 420px;
+}
+
+.wallet-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 50px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.badge-connected { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+.badge-disconnected { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }
+
+.wallet-bar .connect-btn {
+    background: var(--cyan);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.wallet-bar .connect-btn:hover { background: var(--cyan-mid); }
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 2rem 1.5rem 1.5rem;
+    background: var(--white);
+    border-bottom: 3px solid var(--border);
+}
+
+.hero-icon { font-size: 2.5rem; display: block; margin-bottom: 0.2rem; }
+
+.hero h1 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: 0.03em;
+}
+
+.hero .tracking-id {
+    display: inline-block;
+    margin-top: 0.4rem;
+    background: var(--light);
+    border: 1px dashed var(--cyan);
+    border-radius: 6px;
+    padding: 0.3rem 1rem;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.85rem;
+    color: var(--cyan);
+}
+
+.hero .subtitle {
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Count badge */
+.count-badge {
+    display: inline-block;
+    background: var(--cyan);
+    color: var(--white);
+    border-radius: 50px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.4rem;
+}
+
+/* Layout */
+.container {
+    max-width: 960px;
+    margin: 1.5rem auto;
+    padding: 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Two-column grid for desktop */
+.two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+/* Cards */
+.card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(8, 145, 178, 0.08);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--light);
+}
+
+.card-header .card-icon { font-size: 1.2rem; }
+
+.card-header h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0;
+}
+
+/* Two-column form grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.form-grid .span-2 {
+    grid-column: 1 / -1;
+}
+
+/* Fields */
+.field {
+    margin-bottom: 0.75rem;
+}
+
+.field label {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+}
+
+.field input,
+.field textarea,
+.field select {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.9rem;
+    background: var(--surface);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.12);
+}
+
+.field select {
+    cursor: pointer;
+}
+
+/* Field helpers */
+.helper {
+    display: block;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-top: 0.2rem;
+    line-height: 1.3;
+}
+
+/* Timeline / Progress indicator */
+.status-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 0.75rem 0 1rem;
+    padding: 0;
+}
+
+.status-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    background: var(--light);
+    border: 2px solid var(--border);
+}
+
+.status-step:first-child { border-radius: 50px 0 0 50px; }
+.status-step:last-child { border-radius: 0 50px 50px 0; }
+
+.status-step.active {
+    background: var(--cyan);
+    color: var(--white);
+    border-color: var(--cyan);
+}
+
+/* Buttons */
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.query-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 1rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+}
+
+button:active { transform: scale(0.97); }
+
+.btn-cyan {
+    background: var(--cyan);
+    color: var(--white);
+}
+
+.btn-cyan:hover {
+    background: #0e7490;
+    box-shadow: 0 3px 10px rgba(8, 145, 178, 0.3);
+}
+
+.btn-dark {
+    background: var(--dark);
+    color: var(--white);
+}
+
+.btn-dark:hover {
+    background: #155e75;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--cyan);
+    border: 2px solid var(--cyan);
+}
+
+.btn-outline:hover {
+    background: var(--light);
+}
+
+/* Ghost buttons for queries */
+.btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid #cbd5e1;
+}
+
+.btn-ghost:hover {
+    background: var(--light);
+    color: var(--cyan);
+}
+
+.btn-success {
+    background: #059669;
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background: #047857;
+    box-shadow: 0 3px 10px rgba(5, 150, 105, 0.3);
+}
+
+.btn-success.btn-confirm {
+    background: #b91c1c;
+    animation: pulse-confirm 0.3s ease;
+}
+
+@keyframes pulse-confirm {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Output / Shipment Log */
+.log-section {
+    background: var(--dark);
+    border-radius: 14px;
+    padding: 1.5rem;
+}
+
+.log-section h2 {
+    color: var(--border);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.7rem;
+}
+
+.log-section pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #e2e8f0;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.84rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 100px;
+    border: 2px solid rgba(255,255,255,0.08);
+    transition: border-color 0.3s;
+}
+
+.log-section pre.output-success { border-color: #4ade80; }
+.log-section pre.output-error { border-color: #f87171; }
+.log-section pre.output-idle { border-color: rgba(255,255,255,0.08); }
+
+/* Responsive */
+@media (max-width: 760px) {
+    .two-col-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-grid .span-2 { grid-column: 1; }
+    .wallet-bar {
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: center;
+    }
+    .status-track { flex-direction: column; }
+    .status-step { border-radius: 6px !important; }
+    .actions, .query-actions {
+        flex-direction: column;
+    }
+    .actions button, .query-actions button {
+        width: 100%;
+    }
+}

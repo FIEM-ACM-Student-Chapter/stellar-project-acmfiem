@@ -1,0 +1,492 @@
+/* 20 - Community Platform — "Social Feed" Theme */
+:root {
+    --indigo: #4338ca;
+    --indigo-dark: #3730a3;
+    --indigo-light: #e0e7ff;
+    --pink: #ec4899;
+    --pink-dark: #db2777;
+    --pink-light: #fce7f3;
+    --purple-pale: #faf5ff;
+    --slate-900: #0f172a;
+    --slate-700: #334155;
+    --slate-500: #64748b;
+    --slate-300: #cbd5e1;
+    --slate-200: #e2e8f0;
+    --slate-100: #f1f5f9;
+    --white: #ffffff;
+    --red: #ef4444;
+    --green: #22c55e;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--slate-900);
+    background: var(--purple-pale);
+    padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* ── App Shell ── */
+.app {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* ── Wallet Status Bar ── */
+.wallet-status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    padding: 0.55rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    box-shadow: 0 2px 12px rgba(67, 56, 202, 0.08);
+}
+.wallet-status-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.status-dot.connected { background: #22c55e; box-shadow: 0 0 6px rgba(34, 197, 94, 0.5); }
+.status-dot.disconnected { background: #ef4444; box-shadow: 0 0 6px rgba(239, 68, 68, 0.4); }
+.wallet-addr {
+    font-size: 0.82rem;
+    color: var(--slate-500);
+    font-family: "Consolas", "Courier New", monospace;
+}
+.connected-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgba(34, 197, 94, 0.12);
+    color: #16a34a;
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+}
+.wallet-status-bar .post-count {
+    font-size: 0.78rem;
+    background: linear-gradient(135deg, var(--indigo-light), var(--pink-light));
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-weight: 600;
+    color: var(--indigo);
+}
+.wallet-status-bar button {
+    background: linear-gradient(135deg, var(--indigo), var(--pink));
+    color: var(--white);
+    border: none;
+    padding: 0.45rem 1.2rem;
+    border-radius: 50px;
+    font: 600 0.82rem/1 inherit;
+    cursor: pointer;
+}
+.wallet-status-bar button:hover { filter: brightness(1.08); }
+
+/* ── Hero ── */
+.hero {
+    background: linear-gradient(135deg, var(--indigo) 0%, var(--pink) 100%);
+    color: var(--white);
+    padding: 2.5rem 1.5rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.hero-icon { font-size: 2.6rem; margin-bottom: 0.4rem; }
+.hero .kicker {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.75;
+    margin-bottom: 0.6rem;
+}
+.hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+}
+.hero .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* ── Tab Navigation ── */
+.tab-nav {
+    display: flex;
+    gap: 0.25rem;
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 50px;
+    padding: 0.3rem;
+    margin-bottom: 1.2rem;
+}
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    color: var(--slate-500);
+    border: none;
+    border-radius: 50px;
+    padding: 0.55rem 1rem;
+    font: 600 0.84rem/1.3 inherit;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.tab-btn:hover {
+    background: var(--slate-100);
+    transform: none;
+}
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--indigo), var(--pink));
+    color: var(--white);
+    box-shadow: 0 1px 4px rgba(67, 56, 202, 0.25);
+}
+
+/* ── Card ── */
+.card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(67, 56, 202, 0.06);
+}
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid var(--purple-pale);
+}
+.card-header .card-icon { font-size: 1.3rem; }
+.card-header h2 {
+    font-size: 1.1rem;
+    color: var(--slate-900);
+    margin: 0;
+    font-weight: 700;
+}
+
+/* ── Compose Box ── */
+.compose-box {
+    background: var(--white);
+    border: 2px solid var(--indigo-light);
+    border-radius: 20px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 12px rgba(67, 56, 202, 0.08);
+}
+.compose-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+}
+.compose-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--indigo), var(--pink));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.compose-header h2 {
+    font-size: 1.05rem;
+    color: var(--slate-900);
+    margin: 0;
+    font-weight: 700;
+}
+.compose-box textarea {
+    border: none;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    resize: none;
+    background: transparent;
+    width: 100%;
+    min-height: 70px;
+    font-family: inherit;
+    color: var(--slate-900);
+}
+.compose-box textarea:focus { outline: none; box-shadow: none; }
+.compose-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+    margin-top: 0.6rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--slate-200);
+}
+.compose-meta .form-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--slate-500);
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: block;
+}
+.compose-meta input {
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.85rem;
+    background: var(--slate-100);
+}
+.compose-meta input:focus {
+    outline: none;
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+}
+.compose-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.8rem;
+}
+.compose-footer button {
+    background: linear-gradient(135deg, var(--indigo), var(--pink));
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    padding: 0.55rem 1.6rem;
+    font: 700 0.9rem/1 inherit;
+    cursor: pointer;
+}
+.compose-footer button:hover { filter: brightness(1.08); }
+
+/* ── Form Grid ── */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+}
+.form-group { display: flex; flex-direction: column; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--slate-500);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+input, textarea {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+    font: inherit;
+    font-size: 0.88rem;
+    background: var(--white);
+    color: var(--slate-900);
+    transition: border-color 0.2s;
+}
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+}
+textarea { resize: vertical; }
+
+/* ── Field Helpers ── */
+.helper {
+    font-size: 0.73rem;
+    color: var(--slate-500);
+    margin-top: 0.2rem;
+    line-height: 1.3;
+}
+
+/* ── Icon Buttons ── */
+.icon-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font: 600 0.84rem/1 inherit;
+    cursor: pointer;
+    border: 1px solid var(--slate-200);
+    background: var(--white);
+    color: var(--slate-700);
+    transition: all 0.15s;
+}
+.icon-btn:hover { transform: translateY(-1px); }
+.icon-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.icon-btn.like { border-color: var(--pink-light); color: var(--pink); }
+.icon-btn.like:hover { background: var(--pink-light); }
+.icon-btn.comment { border-color: var(--indigo-light); color: var(--indigo); }
+.icon-btn.comment:hover { background: var(--indigo-light); }
+.icon-btn.flag { border-color: #fef3c7; color: #d97706; }
+.icon-btn.flag:hover { background: #fef3c7; }
+.icon-btn.remove { border-color: #fee2e2; color: var(--red); }
+.icon-btn.remove:hover { background: #fee2e2; }
+
+/* ── General Buttons ── */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+button {
+    background: var(--indigo);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 0.9rem;
+    font: 600 0.84rem/1.3 inherit;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+button:hover { background: var(--indigo-dark); transform: translateY(-1px); }
+button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+button.btn-outline {
+    background: var(--white);
+    color: var(--indigo);
+    border: 1px solid var(--indigo-light);
+}
+button.btn-outline:hover { background: var(--indigo-light); }
+
+/* ── Query / Ghost Buttons ── */
+.query-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.btn-ghost {
+    background: transparent;
+    color: var(--slate-500);
+    border: none;
+    text-decoration: underline;
+    padding: 0.5rem 0.75rem;
+    font: 600 0.84rem/1.3 inherit;
+    cursor: pointer;
+}
+.btn-ghost:hover {
+    color: var(--indigo);
+    transform: none;
+    background: transparent;
+}
+
+/* ── Loading Spinner ── */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn-ghost.btn-loading::after,
+.btn-outline.btn-loading::after {
+    border-color: rgba(67, 56, 202, 0.2);
+    border-top-color: var(--indigo);
+}
+.icon-btn.btn-loading::after {
+    border-color: rgba(100, 116, 139, 0.2);
+    border-top-color: var(--slate-700);
+}
+
+/* ── Output Panel ── */
+.output-panel {
+    background: var(--slate-900);
+    color: var(--slate-100);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid var(--slate-500);
+    transition: border-color 0.3s;
+}
+.output-panel.success {
+    border-left-color: #22c55e;
+}
+.output-panel.error {
+    border-left-color: #ef4444;
+}
+.output-panel h2 {
+    font-size: 1rem;
+    color: var(--pink);
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.output-panel pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.84rem;
+    background: rgba(224, 231, 255, 0.05);
+    border-radius: 10px;
+    padding: 1rem;
+    min-height: 100px;
+    line-height: 1.5;
+}
+.empty-state {
+    font-size: 0.9rem;
+    color: var(--slate-500);
+    font-style: italic;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .compose-meta { grid-template-columns: 1fr; }
+    .actions { grid-template-columns: 1fr; }
+    .wallet-status-bar { flex-direction: column; text-align: center; border-radius: 16px; }
+    .wallet-status-left { justify-content: center; }
+    .icon-actions { justify-content: center; }
+    .tab-nav { flex-wrap: wrap; border-radius: 16px; }
+    .tab-btn { border-radius: 12px; }
+    .query-row { flex-direction: column; }
+}
+
+@media (min-width: 701px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .compose-meta {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

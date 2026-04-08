@@ -1,0 +1,537 @@
+/* 10 - Payment Tracking — Ledger Theme */
+:root {
+    --green: #16a34a;
+    --green-light: #22c55e;
+    --green-dark: #15803d;
+    --green-50: #f0fdf4;
+    --green-100: #dcfce7;
+    --dark: #052e16;
+    --dark-mid: #14532d;
+    --dark-light: #166534;
+    --stone-100: #f5f5f4;
+    --stone-200: #e7e5e4;
+    --stone-400: #a8a29e;
+    --stone-700: #44403c;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #1c1917;
+    background: var(--green-50);
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+.app {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ── Wallet Status Bar ── */
+.wallet-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--dark);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-dot.connected {
+    background: #22c55e;
+    box-shadow: 0 0 6px rgba(34,197,94,0.5);
+}
+
+.status-dot.disconnected {
+    background: #ef4444;
+    box-shadow: 0 0 6px rgba(239,68,68,0.5);
+}
+
+.wallet-addr {
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.85rem;
+    color: #e4e4e7;
+}
+
+.wallet-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #22c55e;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 20px;
+    padding: 0.15rem 0.6rem;
+}
+
+.wallet-label {
+    font-size: 0.85rem;
+    color: #86efac;
+}
+
+.wallet-bar .btn-connect {
+    margin-left: auto;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.wallet-bar .btn-connect:hover { background: var(--green-dark); }
+.wallet-bar .btn-connect:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Hero ── */
+.hero {
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 300px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(22,163,74,0.1) 100%);
+    pointer-events: none;
+}
+
+.hero-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.hero .kicker {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--green-light);
+    font-weight: 700;
+}
+
+.hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+    margin: 0.4rem 0;
+    font-variant-numeric: lining-nums;
+}
+
+.hero .subtitle {
+    color: #86efac;
+    font-size: 0.92rem;
+    max-width: 550px;
+    line-height: 1.5;
+}
+
+/* ── Tab Navigation ── */
+.tab-nav {
+    display: flex;
+    gap: 0;
+    background: #fff;
+    border: 1px solid var(--stone-200);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--stone-700);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn:hover {
+    background: var(--green-50);
+    color: var(--green);
+}
+
+.tab-btn.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+    background: var(--green-50);
+}
+
+/* ── Cards ── */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    border: 1px solid var(--stone-200);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--green);
+}
+
+.card-header h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.card-header .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--green-100);
+    color: var(--green);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* ── Forms ── */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--stone-700);
+    margin-bottom: 0.3rem;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.6rem 0.75rem;
+    border: 1.5px solid var(--stone-200);
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.9rem;
+    background: var(--stone-100);
+    transition: border-color 0.2s;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(22,163,74,0.1);
+}
+
+/* ── Helper Text ── */
+.helper {
+    font-size: 0.72rem;
+    color: #a1a1aa;
+    margin-top: 0.25rem;
+    line-height: 1.3;
+}
+
+.helper-light {
+    color: #86efac;
+    opacity: 0.7;
+}
+
+/* ── Currency input styling ── */
+.currency-wrap {
+    position: relative;
+}
+
+.currency-wrap::before {
+    content: "$";
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: var(--green);
+    font-size: 0.95rem;
+}
+
+.currency-wrap input {
+    padding-left: 1.6rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+/* ── Payment Actions Bar ── */
+.payment-bar {
+    background: var(--dark);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+    color: #fff;
+}
+
+.payment-bar-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--green-light);
+    margin-bottom: 1rem;
+}
+
+.payment-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.payment-bar .form-group label {
+    color: #86efac;
+}
+
+.payment-bar .form-group input {
+    background: var(--dark-mid);
+    border-color: var(--dark-light);
+    color: #fff;
+}
+
+.payment-bar .form-group input:focus {
+    border-color: var(--green-light);
+}
+
+.payment-bar .currency-wrap::before {
+    color: var(--green-light);
+}
+
+/* ── Buttons ── */
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.actions-query {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--stone-200);
+}
+
+.payment-bar .actions {
+    margin-top: 0;
+}
+
+.btn {
+    border: none;
+    border-radius: 6px;
+    padding: 0.55rem 1.1rem;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-green {
+    background: var(--green);
+    color: #fff;
+}
+.btn-green:hover:not(:disabled) { background: var(--green-dark); }
+
+.btn-amber {
+    background: #d97706;
+    color: #fff;
+}
+.btn-amber:hover:not(:disabled) { background: #b45309; }
+
+.btn-danger {
+    background: #dc2626;
+    color: #fff;
+}
+.btn-danger:hover:not(:disabled) { background: #b91c1c; }
+
+.btn-danger-outline {
+    background: transparent;
+    color: #ef4444;
+    border: 1.5px solid #ef4444;
+}
+.btn-danger-outline:hover:not(:disabled) { background: rgba(239,68,68,0.1); }
+
+.btn-outline {
+    background: transparent;
+    color: var(--green);
+    border: 1.5px solid var(--stone-200);
+}
+.btn-outline:hover:not(:disabled) { border-color: var(--green); background: var(--green-50); }
+
+.btn-outline-light {
+    background: transparent;
+    color: #86efac;
+    border: 1.5px solid var(--dark-light);
+}
+.btn-outline-light:hover:not(:disabled) { border-color: var(--green-light); color: #fff; }
+
+.btn-ghost {
+    background: transparent;
+    color: var(--stone-700);
+    border: none;
+    padding: 0.55rem 1rem;
+}
+.btn-ghost:hover:not(:disabled) { color: var(--green); background: var(--green-50); }
+
+/* ── Loading Button Spinner ── */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Confirm Pulse ── */
+.btn-confirm-pulse {
+    animation: confirmPulse 0.6s ease;
+}
+
+@keyframes confirmPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* ── Financial Queries ── */
+.queries-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ── Transaction Log (Output) ── */
+.transaction-log {
+    background: var(--dark);
+    border-radius: 10px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.log-header {
+    padding: 0.6rem 1.25rem;
+    background: var(--dark-mid);
+    border-bottom: 1px solid var(--dark-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--green-light);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: "Consolas", monospace;
+}
+
+.log-body {
+    padding: 1rem 1.25rem;
+    min-height: 150px;
+    border-left: 3px solid var(--dark-light);
+    margin: 0.5rem;
+}
+
+.log-body.output-success {
+    border-left-color: #22c55e;
+}
+
+.log-body.output-error {
+    border-left-color: #ef4444;
+}
+
+.log-body.output-idle {
+    border-left-color: var(--dark-light);
+}
+
+.log-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--green-light);
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    color: #86efac;
+    font-size: 0.88rem;
+    font-style: italic;
+    margin: 0;
+    padding: 1rem 0;
+    opacity: 0.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 760px) {
+    .form-grid, .payment-fields {
+        grid-template-columns: 1fr;
+    }
+    .actions, .actions-query { flex-direction: column; }
+    .actions .btn, .actions-query .btn { width: 100%; }
+    .tab-nav { flex-wrap: wrap; }
+}

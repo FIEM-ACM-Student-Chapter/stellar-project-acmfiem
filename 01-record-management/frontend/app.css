@@ -1,0 +1,494 @@
+/* 01 - Record Management — "Clean Office" Theme */
+:root {
+    --slate-700: #475569;
+    --slate-600: #64748b;
+    --slate-500: #94a3b8;
+    --slate-200: #e2e8f0;
+    --slate-100: #f1f5f9;
+    --slate-50: #f8fafc;
+    --white: #ffffff;
+    --accent: #3b82f6;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --primary: #475569;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--slate-100);
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* ── App Shell ── */
+.app {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* ── Wallet Status Bar ── */
+.wallet-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--slate-700);
+    color: var(--white);
+    padding: 0.6rem 1.25rem;
+    border-radius: 10px 10px 0 0;
+    font-size: 0.85rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.wallet-bar .wallet-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.wallet-bar .wallet-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    opacity: 0.9;
+}
+
+.wallet-bar .record-count {
+    background: rgba(255,255,255,0.15);
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.wallet-bar .connect-btn {
+    background: var(--white);
+    color: var(--slate-700);
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.wallet-bar .connect-btn:hover {
+    background: var(--slate-200);
+}
+
+/* ── Status Dot ── */
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.status-dot.connected { background: #22c55e; }
+.status-dot.disconnected { background: #ef4444; }
+
+/* ── Hero Section ── */
+.hero {
+    background: var(--white);
+    padding: 2.5rem 2rem 2rem;
+    border-left: 5px solid var(--slate-700);
+    border-radius: 0 0 0 0;
+}
+
+.hero-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-title::before {
+    content: "\1F4C4";
+    font-size: 2rem;
+}
+
+.hero h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--slate-700);
+    line-height: 1.2;
+}
+
+.hero .kicker {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--slate-500);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.hero .subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+/* ── Tab Navigation ── */
+.tab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--slate-200); margin-bottom: 0; background: var(--white); }
+.tab-btn { padding: 0.6rem 1.2rem; border: none; background: none; font: inherit; font-weight: 600; color: var(--slate-500); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s; }
+.tab-btn:hover { color: var(--slate-700); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* ── Content Area ── */
+.content-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+}
+
+/* ── Cards ── */
+.card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.card.full-width {
+    grid-column: 1 / -1;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--slate-100);
+}
+
+.card-header::before {
+    font-size: 1.1rem;
+}
+
+.card-header.details::before {
+    content: "\1F4DD";
+}
+
+.card-header.category::before {
+    content: "\1F50D";
+}
+
+.card-header.actions-header::before {
+    content: "\26A1";
+}
+
+.card-header.output-header::before {
+    content: "\1F4BB";
+}
+
+.card-header h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--slate-700);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ── Form Fields ── */
+.field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.field-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--slate-600);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--slate-200);
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.9rem;
+    background: var(--slate-50);
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    background: var(--white);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ── Helper Text ── */
+.helper { display: block; font-size: 0.72rem; color: #94a3b8; margin-top: 0.25rem; }
+
+/* ── Action Buttons ── */
+.actions-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding-top: 0.5rem;
+}
+
+.btn {
+    padding: 0.55rem 1.1rem;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid var(--slate-700);
+    background: var(--white);
+    color: var(--slate-700);
+    position: relative;
+}
+
+.btn:hover {
+    background: var(--slate-100);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: var(--slate-700);
+    color: var(--white);
+    border-color: var(--slate-700);
+}
+
+.btn-primary:hover {
+    background: #334155;
+    border-color: #334155;
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--slate-700);
+    border: 2px solid var(--slate-700);
+}
+
+.btn-secondary:hover {
+    background: var(--slate-100);
+}
+
+.btn-destructive {
+    background: var(--white);
+    color: #ef4444;
+    border: 2px solid #ef4444;
+}
+
+.btn-destructive:hover {
+    background: #fef2f2;
+}
+
+.btn-ghost {
+    padding: 0.55rem 1.1rem;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
+    color: var(--slate-600);
+    position: relative;
+}
+
+.btn-ghost:hover {
+    background: var(--slate-100);
+    color: var(--slate-700);
+}
+
+.btn-ghost:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-accent {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+}
+
+.btn-accent:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+/* ── Query Bar ── */
+.query-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+}
+
+/* ── Loading Spinner ── */
+.btn-loading { position: relative; color: transparent !important; }
+.btn-loading::after {
+    content: ""; position: absolute; width: 16px; height: 16px;
+    top: 50%; left: 50%; margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Confirm State ── */
+.btn-confirm { animation: pulse 0.5s ease; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+/* ── Output Console ── */
+.output-console {
+    background: #1e293b;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.output-console.output-success { border-left: 4px solid #22c55e; }
+.output-console.output-error { border-left: 4px solid #ef4444; }
+.output-console.output-idle { border-left: 4px solid #94a3b8; }
+
+.console-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: #0f172a;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.console-header::before {
+    content: "\25B6";
+    font-size: 0.6rem;
+    color: #22c55e;
+}
+
+.console-dots {
+    display: flex;
+    gap: 5px;
+    margin-right: 0.5rem;
+}
+
+.console-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+}
+
+.console-dots span:nth-child(1) { background: #ef4444; }
+.console-dots span:nth-child(2) { background: #f59e0b; }
+.console-dots span:nth-child(3) { background: #22c55e; }
+
+.output-console pre {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    color: #a5f3fc;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    color: #64748b;
+    text-align: center;
+    padding: 2rem;
+}
+
+.empty-state .empty-icon {
+    font-size: 2rem;
+    opacity: 0.4;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ── Divider ── */
+.section-divider {
+    height: 1px;
+    background: var(--slate-200);
+    margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .content-area {
+        grid-template-columns: 1fr;
+    }
+
+    .field-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wallet-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .actions-bar {
+        flex-direction: column;
+    }
+
+    .query-bar {
+        flex-direction: column;
+    }
+
+    .btn, .btn-ghost {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tab-nav {
+        overflow-x: auto;
+    }
+}

@@ -1,0 +1,376 @@
+/* ===== 35 Memo Chat — Discord/Slack Theme ===== */
+:root {
+    --indigo: #4f46e5;
+    --indigo-dark: #1e1b4b;
+    --indigo-deep: #312e81;
+    --indigo-light: #eef2ff;
+    --lavender: #e0e7ff;
+    --white: #ffffff;
+    --gray-100: #f8fafc;
+    --gray-200: #e2e5ee;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+    --gray-800: #1e293b;
+    --online: #22c55e;
+    --danger: #ef4444;
+    --danger-dark: #dc2626;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 14px rgba(0,0,0,0.10);
+    --shadow-lg: 0 8px 28px rgba(30,27,75,0.18);
+    --radius: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--gray-800);
+    background: var(--indigo-dark);
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* ---- App Shell ---- */
+.app {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---- Hero / Server Header ---- */
+.hero {
+    background: linear-gradient(135deg, var(--indigo-dark) 0%, var(--indigo-deep) 100%);
+    color: var(--white);
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.hero-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.hero-hash {
+    font-size: 2.2rem;
+    font-weight: 800;
+    opacity: 0.6;
+    line-height: 1;
+}
+.hero-title h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.hero-title .kicker {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--lavender);
+    opacity: 0.8;
+}
+.hero .subtitle {
+    color: #c7d2fe;
+    font-size: 0.9rem;
+}
+
+/* ---- Wallet Status Bar ---- */
+.wallet-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--indigo-light);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+.wallet-info {
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+.wallet-info .wallet-addr {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 260px;
+}
+.wallet-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.wallet-dot.connected { background: var(--online); box-shadow: 0 0 4px var(--online); }
+.wallet-dot.disconnected { background: var(--danger); }
+
+/* ---- Tab Navigation ---- */
+.tab-bar {
+    display: flex;
+    gap: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    overflow: hidden;
+}
+.tab-btn {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    background: transparent;
+    color: var(--gray-400);
+    border: none;
+    border-radius: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    border-bottom: 2px solid transparent;
+}
+.tab-btn:hover { background: var(--indigo-light); color: var(--gray-800); }
+.tab-btn.active {
+    color: var(--indigo);
+    background: var(--indigo-light);
+    border-bottom-color: var(--indigo);
+}
+
+/* ---- Content Area ---- */
+.content-area {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ---- Cards ---- */
+.card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+.card-header {
+    background: var(--indigo-light);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0.7rem 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.card-header h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--indigo-dark);
+}
+.card-header .hash-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--indigo);
+    color: var(--white);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+.card-body {
+    padding: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* ---- Field Layout ---- */
+.field-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.field.full {
+    grid-column: 1 / -1;
+}
+.field label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.field-helper {
+    font-size: 0.73rem;
+    color: var(--gray-400);
+    margin-top: 0.1rem;
+}
+input, textarea {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.9rem;
+    background: var(--gray-100);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+textarea { resize: vertical; }
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--gray-600);
+}
+.checkbox-row input[type="checkbox"] {
+    width: auto;
+    accent-color: var(--indigo);
+}
+
+/* ---- Buttons ---- */
+button {
+    background: var(--indigo);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    padding: 0.55rem 1rem;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+button:hover { background: var(--indigo-deep); }
+button:active { transform: scale(0.97); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+.btn-outline {
+    background: transparent;
+    color: var(--indigo);
+    border: 1.5px solid var(--indigo);
+}
+.btn-outline:hover {
+    background: var(--indigo-light);
+}
+.btn-ghost {
+    background: transparent;
+    color: var(--indigo);
+    border: none;
+}
+.btn-ghost:hover {
+    background: var(--indigo-light);
+}
+
+/* ---- Loading Spinner ---- */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- Output Panel ---- */
+.output-panel {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+.output-header {
+    background: var(--indigo-light);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0.7rem 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.output-header h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--indigo-dark);
+}
+.output-body {
+    padding: 1.15rem;
+    background: var(--gray-100);
+    min-height: 140px;
+    transition: border-color 0.3s;
+}
+.output-body.status-success { border-left: 3px solid var(--online); }
+.output-body.status-error { border-left: 3px solid var(--danger); }
+.output-body.status-idle { border-left: 3px solid var(--gray-200); }
+.output-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--gray-800);
+}
+
+/* ---- Empty State ---- */
+.empty-state {
+    color: var(--gray-400);
+    font-style: italic;
+    font-size: 0.88rem;
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 641px) {
+    .content-area.two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+    }
+    .content-area.two-col > .full-width {
+        grid-column: 1 / -1;
+    }
+}
+@media (max-width: 640px) {
+    .hero { padding: 1.25rem; }
+    .hero-title h1 { font-size: 1.2rem; }
+    .content-area { padding: 1rem; }
+    .field-group { grid-template-columns: 1fr; }
+    .field.full { grid-column: 1; }
+    .btn-row { flex-direction: column; }
+    .btn-row button { width: 100%; }
+    .wallet-info .wallet-addr { max-width: 140px; }
+    .tab-btn { font-size: 0.78rem; padding: 0.6rem 0.5rem; }
+}

@@ -1,0 +1,485 @@
+/* 32 - DAO Voting — Dark Navy / Gold Governance Theme */
+:root {
+    --dao-navy: #0c0a09;
+    --dao-charcoal: #1c1917;
+    --dao-dark: #292524;
+    --dao-gold: #eab308;
+    --dao-gold-dim: #a16207;
+    --dao-white: #fafaf9;
+    --dao-gray: #a8a29e;
+    --dao-green: #22c55e;
+    --dao-red: #ef4444;
+    --dao-radius: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--dao-white);
+    background: var(--dao-navy);
+    background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(234, 179, 8, 0.06) 0%, transparent 60%);
+    padding: clamp(1rem, 4vw, 3rem);
+}
+
+/* ---- Layout ---- */
+.app {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+/* ---- Wallet Status Bar ---- */
+.wallet-status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(12, 10, 9, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--dao-dark);
+    padding: 0.5rem 1rem;
+    margin: -1rem -1rem 1rem -1rem;
+    font-size: 0.82rem;
+    color: var(--dao-gray);
+}
+
+.wallet-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dao-red);
+    flex-shrink: 0;
+}
+
+.wallet-dot.connected {
+    background: var(--dao-green);
+}
+
+.wallet-status-text {
+    font-family: "Consolas", monospace;
+    font-size: 0.8rem;
+}
+
+/* ---- Hero ---- */
+.hero {
+    text-align: center;
+    padding: clamp(1.5rem, 4vw, 2.5rem) 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--dao-gold);
+}
+
+.hero-icon {
+    font-size: 2.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--dao-gold);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+}
+
+.hero .subtitle {
+    font-size: 0.95rem;
+    color: var(--dao-gray);
+    margin-bottom: 1.25rem;
+}
+
+/* ---- Wallet Bar ---- */
+.wallet-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: var(--dao-charcoal);
+    border: 1px solid var(--dao-dark);
+    border-radius: var(--dao-radius);
+    padding: 0.6rem 1rem;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.wallet-bar .wallet-text {
+    font-size: 0.82rem;
+    color: var(--dao-gray);
+    word-break: break-all;
+    flex: 1;
+    font-family: "Consolas", monospace;
+}
+
+.wallet-bar button {
+    background: var(--dao-gold);
+    color: var(--dao-navy);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1.1rem;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.wallet-bar button:hover {
+    background: #facc15;
+}
+
+.proposal-count {
+    font-size: 0.85rem;
+    color: var(--dao-gray);
+    margin-top: 0.75rem;
+}
+
+.proposal-count span {
+    color: var(--dao-gold);
+    font-weight: 700;
+}
+
+/* ---- Tab Navigation ---- */
+.tab-bar {
+    display: flex;
+    gap: 0.25rem;
+    background: var(--dao-charcoal);
+    border: 1px solid var(--dao-dark);
+    border-radius: var(--dao-radius);
+    padding: 0.3rem;
+    margin-bottom: 1.25rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 0.6rem 0.75rem;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--dao-gray);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn:hover {
+    background: var(--dao-dark);
+}
+
+.tab-btn.active {
+    background: var(--dao-gold);
+    color: var(--dao-navy);
+}
+
+/* ---- Cards ---- */
+.card {
+    background: var(--dao-charcoal);
+    border: 1px solid var(--dao-dark);
+    border-radius: var(--dao-radius);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--dao-dark);
+    background: rgba(234, 179, 8, 0.04);
+}
+
+.card-header .card-icon {
+    font-size: 1.15rem;
+}
+
+.card-header h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dao-gold);
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+/* ---- Vote Card (prominent) ---- */
+.vote-card {
+    border: 1.5px solid var(--dao-gold);
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.08);
+}
+
+.vote-card .card-header {
+    background: rgba(234, 179, 8, 0.1);
+}
+
+/* ---- Form Fields ---- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem 1.25rem;
+}
+
+.form-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--dao-gray);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--dao-dark);
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.92rem;
+    background: var(--dao-navy);
+    color: var(--dao-white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--dao-gold);
+    box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.12);
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field-helper {
+    display: block;
+    font-size: 0.73rem;
+    color: var(--dao-gray);
+    margin-top: 0.2rem;
+    line-height: 1.3;
+    opacity: 0.8;
+}
+
+/* ---- Vote Toggle Buttons ---- */
+.vote-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.vote-toggle-btn {
+    flex: 1;
+    padding: 0.65rem;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.vote-for {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--dao-green);
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.vote-for.active {
+    background: var(--dao-green);
+    color: #fff;
+    border-color: var(--dao-green);
+}
+
+.vote-for:hover {
+    background: rgba(34, 197, 94, 0.25);
+}
+
+.vote-for.active:hover {
+    background: var(--dao-green);
+}
+
+.vote-against {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--dao-red);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.vote-against.active {
+    background: var(--dao-red);
+    color: #fff;
+    border-color: var(--dao-red);
+}
+
+.vote-against:hover {
+    background: rgba(239, 68, 68, 0.25);
+}
+
+.vote-against.active:hover {
+    background: var(--dao-red);
+}
+
+/* ---- Buttons ---- */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    background: var(--dao-gold);
+    color: var(--dao-navy);
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+}
+
+.btn:hover:not(:disabled) {
+    background: #facc15;
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--dao-gold);
+    border: 1px solid var(--dao-gold-dim);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: rgba(234, 179, 8, 0.1);
+}
+
+.btn-danger {
+    background: var(--dao-red);
+    color: #fff;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #dc2626;
+}
+
+/* ---- Loading Spinner ---- */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.btn:not(.btn-ghost):not(.btn-danger).btn-loading::after {
+    border-color: rgba(12, 10, 9, 0.2);
+    border-top-color: var(--dao-navy);
+}
+
+.btn-ghost.btn-loading::after {
+    border-color: rgba(234, 179, 8, 0.2);
+    border-top-color: var(--dao-gold);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---- Output ---- */
+.output-card .card-body pre,
+.output-pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--dao-navy);
+    border: 1px solid var(--dao-dark);
+    border-left: 4px solid var(--dao-dark);
+    border-radius: 6px;
+    padding: 1rem;
+    min-height: 120px;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.85rem;
+    color: var(--dao-gray);
+    transition: border-color 0.3s;
+}
+
+.output-pre.status-success {
+    border-left-color: var(--dao-green);
+}
+
+.output-pre.status-error {
+    border-left-color: var(--dao-red);
+}
+
+.output-pre.status-idle {
+    border-left-color: var(--dao-dark);
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 641px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .actions {
+        grid-template-columns: 1fr;
+    }
+    .wallet-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .tab-bar {
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        font-size: 0.78rem;
+        padding: 0.5rem;
+    }
+    .wallet-status-bar {
+        margin: -1rem -0.5rem 1rem -0.5rem;
+    }
+}

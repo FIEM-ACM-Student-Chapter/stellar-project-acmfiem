@@ -1,0 +1,553 @@
+/* 02 - Resource Availability — "Dashboard" Theme */
+:root {
+    --emerald: #059669;
+    --emerald-light: #d1fae5;
+    --emerald-dark: #047857;
+    --dark: #1e293b;
+    --dark-deeper: #0f172a;
+    --surface: #ffffff;
+    --surface-alt: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --red: #ef4444;
+    --red-light: #fef2f2;
+    --primary: #059669;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: #f1f5f9;
+    padding: 0;
+}
+
+/* ── App Layout: Sidebar + Main ── */
+.app {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    background: var(--dark);
+    color: #ffffff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-header .kicker {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--emerald);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-header h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #ffffff;
+}
+
+.sidebar-header .subtitle {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+}
+
+/* ── Wallet Section in Sidebar ── */
+.wallet-section {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.wallet-section .connect-btn {
+    width: 100%;
+    padding: 0.6rem;
+    background: var(--emerald);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.wallet-section .connect-btn:hover {
+    background: var(--emerald-dark);
+}
+
+.wallet-address-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+}
+
+.wallet-section .wallet-address {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    word-break: break-all;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ── Status Dot ── */
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.status-dot.connected { background: #22c55e; }
+.status-dot.disconnected { background: #ef4444; }
+
+/* ── Metric Cards in Sidebar ── */
+.metric-cards {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.metric-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.metric-card .metric-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+    margin-bottom: 0.35rem;
+}
+
+.metric-card .metric-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--emerald);
+}
+
+/* ── Resource Info Form in Sidebar ── */
+.sidebar-form {
+    padding: 1.25rem 1.5rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-form h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--emerald);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.sidebar-form h2::before {
+    content: "\25C9";
+}
+
+.sidebar-field {
+    margin-bottom: 0.9rem;
+}
+
+.sidebar-field label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.sidebar-field input {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    color: #ffffff;
+    font: inherit;
+    font-size: 0.85rem;
+    transition: border-color 0.2s;
+}
+
+.sidebar-field input:focus {
+    outline: none;
+    border-color: var(--emerald);
+    background: rgba(255,255,255,0.1);
+}
+
+.sidebar-field input::placeholder {
+    color: #64748b;
+}
+
+/* ── Helper Text ── */
+.helper { display: block; font-size: 0.72rem; color: #94a3b8; margin-top: 0.25rem; }
+.sidebar-field .helper { color: #64748b; }
+
+.sidebar-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.sidebar-actions .btn-sidebar {
+    padding: 0.5rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #e2e8f0;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.sidebar-actions .btn-sidebar:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: var(--emerald);
+    color: var(--emerald);
+}
+
+.sidebar-actions .btn-sidebar:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.sidebar-actions .btn-register {
+    grid-column: 1 / -1;
+    background: var(--emerald);
+    color: #ffffff;
+    border-color: var(--emerald);
+}
+
+.sidebar-actions .btn-register:hover {
+    background: var(--emerald-dark);
+}
+
+/* ── Main Content ── */
+.main-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ── Availability Badge ── */
+.availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.badge-available {
+    background: var(--emerald-light);
+    color: var(--emerald-dark);
+}
+
+.badge-available::before {
+    content: "\2713";
+    font-size: 0.75rem;
+}
+
+.badge-reserved {
+    background: var(--red-light);
+    color: var(--red);
+}
+
+.badge-reserved::before {
+    content: "\2717";
+}
+
+/* ── Panel Cards ── */
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-header h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.panel-header h2::before {
+    font-size: 1rem;
+}
+
+.panel-header.reservation-header h2::before {
+    content: "\1F4C5";
+}
+
+.panel-header.status-header h2::before {
+    content: "\2139\FE0F";
+}
+
+.panel-body {
+    padding: 1.5rem;
+}
+
+/* ── Reservation Form ── */
+.reservation-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.res-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.res-field label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+}
+
+.res-field input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.9rem;
+    background: var(--surface);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.res-field input:focus {
+    outline: none;
+    border-color: var(--emerald);
+    box-shadow: 0 0 0 3px rgba(5,150,105,0.1);
+}
+
+.time-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.reservation-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+}
+
+.btn-main {
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.btn-main:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-reserve {
+    background: var(--emerald);
+    color: white;
+}
+
+.btn-reserve:hover {
+    background: var(--emerald-dark);
+}
+
+.btn-release {
+    background: var(--surface);
+    color: var(--red);
+    border: 2px solid var(--red);
+}
+
+.btn-release:hover {
+    background: var(--red-light);
+}
+
+.btn-check {
+    background: var(--surface);
+    color: var(--emerald);
+    border: 2px solid var(--emerald);
+}
+
+.btn-check:hover {
+    background: var(--emerald-light);
+}
+
+/* ── Loading Spinner ── */
+.btn-loading { position: relative; color: transparent !important; }
+.btn-loading::after {
+    content: ""; position: absolute; width: 16px; height: 16px;
+    top: 50%; left: 50%; margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Confirm State ── */
+.btn-confirm { animation: pulse 0.5s ease; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+/* ── Output / Status Panel ── */
+.status-output {
+    background: var(--dark);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.status-output.output-success { border-left: 4px solid #22c55e; }
+.status-output.output-error { border-left: 4px solid #ef4444; }
+.status-output.output-idle { border-left: 4px solid #94a3b8; }
+
+.status-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    background: var(--dark-deeper);
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.status-bar .status-dot-live {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--emerald);
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.status-output pre {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    color: #6ee7b7;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    color: #64748b;
+    text-align: center;
+    padding: 2rem;
+}
+
+.empty-state .empty-icon {
+    font-size: 2rem;
+    opacity: 0.4;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+    .app {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        max-height: none;
+        position: static;
+        height: auto;
+    }
+
+    .time-row {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation-actions {
+        flex-direction: column;
+    }
+
+    .btn-main {
+        width: 100%;
+        text-align: center;
+    }
+
+    .sidebar-actions {
+        grid-template-columns: 1fr;
+    }
+}

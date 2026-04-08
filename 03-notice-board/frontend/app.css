@@ -1,0 +1,538 @@
+/* 03 - Notice Board — "Bulletin Board" Theme */
+:root {
+    --amber: #f59e0b;
+    --amber-dark: #d97706;
+    --brown: #92400e;
+    --brown-light: #b45309;
+    --warm-white: #fffbeb;
+    --cork: #d4a574;
+    --cork-dark: #b8865a;
+    --paper: #fffff5;
+    --paper-shadow: rgba(146,64,14,0.12);
+    --text: #451a03;
+    --text-muted: #78350f;
+    --pin-red: #dc2626;
+    --pin-blue: #2563eb;
+    --pin-green: #16a34a;
+    --primary: #92400e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: #f5f0e8;
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* ── App Shell ── */
+.app {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* ── Cork Board Header ── */
+.board-header {
+    background: var(--brown);
+    color: #ffffff;
+    padding: 1.75rem 2rem 1.5rem;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.board-header::before {
+    content: "\1F4CC";
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 2rem;
+    opacity: 0.4;
+}
+
+.board-header::after {
+    content: "\1F4CC";
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    font-size: 2rem;
+    opacity: 0.4;
+    transform: rotate(-20deg);
+}
+
+.board-header .kicker {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--amber);
+    font-weight: 700;
+}
+
+.board-header h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-top: 0.25rem;
+}
+
+.board-header .subtitle {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.4rem;
+    line-height: 1.5;
+}
+
+/* ── Wallet Strip ── */
+.wallet-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--brown-light);
+    padding: 0.6rem 2rem;
+    color: #ffffff;
+    font-size: 0.82rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.wallet-strip .connect-btn {
+    background: var(--amber);
+    color: var(--brown);
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.wallet-strip .connect-btn:hover {
+    background: var(--amber-dark);
+    color: #ffffff;
+}
+
+.wallet-strip .wallet-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.wallet-strip .wallet-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0.85;
+    font-size: 0.78rem;
+}
+
+.wallet-strip .notice-count {
+    background: rgba(255,255,255,0.15);
+    padding: 0.2rem 0.65rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* ── Status Dot ── */
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.status-dot.connected { background: #22c55e; }
+.status-dot.disconnected { background: #ef4444; }
+
+/* ── Tab Navigation ── */
+.tab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--cork); background: var(--paper); }
+.tab-btn { padding: 0.6rem 1.2rem; border: none; background: none; font: inherit; font-weight: 600; color: var(--cork-dark); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s; }
+.tab-btn:hover { color: var(--brown); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* ── Cork Board Surface ── */
+.cork-surface {
+    background:
+        radial-gradient(circle at 20% 30%, rgba(212,165,116,0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(212,165,116,0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #c9a06c 0%, #d4a574 30%, #c19660 70%, #d4a574 100%);
+    padding: 2rem;
+    border-radius: 0 0 12px 12px;
+    min-height: 200px;
+}
+
+/* ── Board Layout ── */
+.board-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* ── Paper Note Card ── */
+.note-card {
+    background: var(--paper);
+    padding: 1.5rem 1.5rem 1.25rem;
+    border-radius: 2px;
+    box-shadow:
+        3px 3px 8px var(--paper-shadow),
+        -1px -1px 2px rgba(255,255,255,0.5);
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+}
+
+.full-width-note {
+    grid-column: 1 / -1;
+}
+
+/* Pushpin decoration */
+.note-card::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 40% 40%, #ff6b6b, #dc2626);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 -2px 3px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.note-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px dashed var(--cork);
+}
+
+.note-card-header::before {
+    font-size: 1.1rem;
+}
+
+.note-card-header.post-header::before {
+    content: "\270D";
+}
+
+.note-card-header.action-header::before {
+    content: "\1F4CB";
+}
+
+.note-card-header h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--brown);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ── Form Fields on Paper ── */
+.paper-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+}
+
+.paper-field {
+    margin-bottom: 0.85rem;
+}
+
+.paper-fields-grid .paper-field {
+    margin-bottom: 0;
+}
+
+.paper-field label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--brown-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+}
+
+.paper-field input,
+.paper-field textarea {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border: none;
+    border-bottom: 2px solid var(--cork);
+    border-radius: 0;
+    font: inherit;
+    font-size: 0.88rem;
+    background: transparent;
+    color: var(--text);
+    transition: border-color 0.2s;
+}
+
+.paper-field input:focus,
+.paper-field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--amber);
+    background: rgba(245,158,11,0.04);
+}
+
+.paper-field textarea {
+    resize: vertical;
+    min-height: 70px;
+    border: 2px solid var(--cork);
+    border-radius: 4px;
+    padding: 0.6rem;
+}
+
+.paper-field textarea:focus {
+    border-color: var(--amber);
+}
+
+/* ── Helper Text ── */
+.helper { display: block; font-size: 0.72rem; color: #94a3b8; margin-top: 0.25rem; }
+
+/* ── Priority indicator ── */
+.priority-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.priority-row input {
+    flex: 1;
+}
+
+/* ── Action Buttons ── */
+.note-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.btn-note {
+    padding: 0.5rem 0.9rem;
+    border-radius: 4px;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid var(--brown);
+    background: var(--paper);
+    color: var(--brown);
+    position: relative;
+}
+
+.btn-note:hover {
+    background: var(--warm-white);
+    transform: translateY(-1px);
+}
+
+.btn-note:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-post {
+    background: var(--amber);
+    color: var(--brown);
+    border-color: var(--amber-dark);
+}
+
+.btn-post:hover {
+    background: var(--amber-dark);
+    color: #ffffff;
+}
+
+.btn-secondary-note {
+    background: var(--paper);
+    color: var(--brown);
+    border: 2px solid var(--brown);
+}
+
+.btn-ghost-note {
+    background: transparent;
+    color: var(--brown-light);
+    border: none;
+}
+
+.btn-ghost-note:hover {
+    background: rgba(180,83,9,0.08);
+}
+
+.btn-pin {
+    background: var(--pin-red);
+    color: #ffffff;
+    border-color: var(--pin-red);
+    position: relative;
+}
+
+.btn-pin::before {
+    content: "\1F4CC";
+    margin-right: 0.3rem;
+}
+
+.btn-pin:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+}
+
+.btn-remove {
+    background: transparent;
+    color: var(--pin-red);
+    border-color: var(--pin-red);
+}
+
+.btn-remove:hover {
+    background: #fef2f2;
+}
+
+/* ── Loading Spinner ── */
+.btn-loading { position: relative; color: transparent !important; }
+.btn-loading::after {
+    content: ""; position: absolute; width: 16px; height: 16px;
+    top: 50%; left: 50%; margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Confirm State ── */
+.btn-confirm { animation: pulse 0.5s ease; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+/* ── Output Note ── */
+.output-note {
+    grid-column: 1 / -1;
+    background: var(--paper);
+    padding: 0;
+    border-radius: 2px;
+    box-shadow: 3px 3px 8px var(--paper-shadow);
+    position: relative;
+    transform: rotate(0deg);
+    overflow: hidden;
+}
+
+.output-note.output-success { border-left: 4px solid #22c55e; }
+.output-note.output-error { border-left: 4px solid #ef4444; }
+.output-note.output-idle { border-left: 4px solid #94a3b8; }
+
+.output-note::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 30%;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 40% 40%, #4ade80, #16a34a);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.output-note-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    background: var(--brown);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.output-note-header::before {
+    content: "\25B6";
+    color: var(--amber);
+    font-size: 0.65rem;
+}
+
+.output-note pre {
+    margin: 0;
+    padding: 1.25rem;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-height: 120px;
+    line-height: 1.6;
+    color: var(--text);
+    background: linear-gradient(
+        transparent 0px,
+        transparent 27px,
+        #e8d4b8 27px,
+        #e8d4b8 28px
+    );
+    background-size: 100% 28px;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem;
+}
+
+.empty-state .empty-icon {
+    font-size: 2rem;
+    opacity: 0.4;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .board-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .paper-fields-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .note-card {
+        transform: rotate(0deg);
+    }
+
+    .wallet-strip {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .note-actions {
+        flex-direction: column;
+    }
+
+    .btn-note {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cork-surface {
+        padding: 1rem;
+    }
+
+    .tab-nav {
+        overflow-x: auto;
+    }
+}
