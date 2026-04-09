@@ -110,21 +110,16 @@ Open `src/App.jsx` and make these two changes at the top of the file:
 
 ### Step 6 -- Deploy your smart contract
 
-1. Open https://app.stacyide.xyz/ in your browser
-2. Click **Connect** in the top right
-3. Click **Connect Wallet** -- a Freighter popup will appear, click **Connect / Approve**
-4. Click **Continue with Google** and sign in with your Google account
-5. Reload the page
-6. Click **Generate** -- you will see a code editor with a sample hello world contract
-7. Select all the sample code and **delete it**
-8. Open the `contract/contract.rs` file from your chosen project folder
-9. Copy that contract code and **paste it** into the Stady editor
-10. Click **Build Contract** and wait for it to finish
-11. Click **Deploy to Testnet**
-12. A modal will appear -- click **Confirm**
-13. Enter your Freighter password if asked
-14. Another modal will appear -- click **Confirm** again
-15. You will get a **Contract ID** -- copy it
+1. Open STELLAR IDE : https://stellaride.vercel.app/ in your browser
+2. sign in with github
+3. Paste your contract code on the contracts/contract/src/lib.rs in this STELLAR IDE
+4. Click on deploy button 
+5. Click **Build Contract** and wait for it to finish
+6. Click **Deploy to Testnet**
+7. A modal will appear -- click **Confirm**
+8. Enter your Freighter password if asked
+9. Another modal will appear -- click **Confirm** again
+10. You will get a **Contract ID** -- copy it
 
 ### Step 7 -- Configure your project with the Contract ID and wallet address
 
